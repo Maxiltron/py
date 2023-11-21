@@ -17,22 +17,23 @@ def Replay():
     while rep == "Yes":
         essai: int = 10
         a = input("Choisissez le nb minimum à deviner: ")
-        Ask_only_number(a)
+        a=Ask_only_number(a)
         b = input("Choisissez le nb maximum à deviner: ")
-        Ask_only_number(b)
+        b=Ask_only_number(b)
         c = input("Deviner le nombre mystère: ")
-        Ask_only_number(c)
+        nb=Ask_only_number(c)
 
         nb_mystère: int = random.randint(a,b)
-        while n != nb_mystère and essai > 1:
-            if c < nb_mystère:
+        while nb != nb_mystère and essai > 1:
+            if nb < nb_mystère:
                 print("Plus", "(Il vous reste", str(essai - 1), "essai sur 10)")
 
-            elif c > nb_mystère:
+            elif nb > nb_mystère:
                 print("Moins", "(Il vous reste", str(essai - 1), "essai sur 10)")
 
             essai = essai - 1
-            nb: int = int(input("Deviner le nombre mystère: "))
+            d: int = int(input("Deviner le nombre mystère: "))
+            nb=Ask_only_number(d)
         if essai == 1:
             print("Perdu")
             rep: str = input("Voulez vous rejouer ? (Yes/No): ")
