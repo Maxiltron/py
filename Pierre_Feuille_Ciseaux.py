@@ -21,6 +21,7 @@ def Choice_AI():
 def Game():
     J1: int =Choice_user()
     AI: int =Choice_AI()
+    print("Le choix de l'ordi est:",AI)
     if J1 == AI:
         print("Egalité")
     elif J1 == 1  and AI == 2:
