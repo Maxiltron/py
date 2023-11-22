@@ -34,10 +34,11 @@ def Game():
         print("Perdu")
     Replay()
 def Replay():
-    rep: str = input("Voulez vous rejouer ? (Yes/No): ")
-    while rep == "Yes":
+    rep: str = input("Voulez vous rejouer ? (yes/no): ")
+    while rep == "yes":
         J1: int = Choice_user()
         AI: int = Choice_AI()
+        print("Le choix de l'ordi est:", AI)
         if J1 == AI:
             print("Egalité")
         elif J1 == 1 and AI == 2:
@@ -48,7 +49,7 @@ def Replay():
             print("Gagné")
         else:
             print("Perdu")
-        rep: str = input("Voulez vous rejouer ? (Yes/No): ")
+        rep: str = input("Voulez vous rejouer ? (yes/no): ")
     print("Merci d'avoir joué !")
 
 Game()
