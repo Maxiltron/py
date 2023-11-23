@@ -1,72 +1,74 @@
 import random
 
 
-def Ask_only_number(a: str):
-    while a.isdigit() != True:
-        a=input("Donnez un nombre: ")
-    return int(a)
+def Ask_only_number(message: str):
+    while True:
+        value: str = input(message)
+
+        if value.isdigit():
+            return int(value)
+
+        print("Erreur")
 
 
 
+def Ask_Min_Max():
+    while True:
+        min: str = Ask_only_number("Donnez un nombre minimum: ")
+        max: str = Ask_only_number("Donnez un nombre maximum: ")
+
+        if min < max:
+            return min, max
+        print("Erreur")
+
+def nb_random():
+    (a,b) = Ask_Min_Max()
+    nb: int = random.randint(a,b)
+    return nb
 
 
-
-
-def Replay():
-    rep: str = input("Voulez vous rejouer ? (Yes/No): ")
-    while rep == "Yes":
+def Replay(message: str):
+    while message == "yes":
         essai: int = 10
-        a = input("Choisissez le nb minimum à deviner: ")
-        a=Ask_only_number(a)
-        b = input("Choisissez le nb maximum à deviner: ")
-        b=Ask_only_number(b)
-        c = input("Deviner le nombre mystère: ")
-        nb=Ask_only_number(c)
-
-        nb_mystère: int = random.randint(a,b)
-        while nb != nb_mystère and essai > 1:
-            if nb < nb_mystère:
+        nb_AI: int = nb_random()
+        while True:
+            nb: int = Ask_only_number("Donnez un nombre: ")
+            if essai == 0:
+                print("Perdu")
+                return False
+            elif nb < nb_AI:
                 print("Plus", "(Il vous reste", str(essai - 1), "essai sur 10)")
-
-            elif nb > nb_mystère:
+            elif nb > nb_AI:
                 print("Moins", "(Il vous reste", str(essai - 1), "essai sur 10)")
+            else:
+                print("Victoire")
+                return False
+            essai=essai-1
 
-            essai = essai - 1
-            d: int = int(input("Deviner le nombre mystère: "))
-            nb=Ask_only_number(d)
-        if essai == 1:
-            print("Perdu")
-            rep: str = input("Voulez vous rejouer ? (Yes/No): ")
+
+def More_or_Less(a: int,b: int):
+    if a < b:
+        value: str = "Plus"
+    elif a > b:
+        value: str = "Moins"
+    else:
+        value: str = "Victoire"
+    return value
+
+def Game():
+    essai: int = 10
+    nb_AI: int = nb_random()
+    while essai >= 1:
+        nb: int = Ask_only_number("Donner un nombre: ")
+        result: str = More_or_Less(nb,nb_AI)
+        if result == "Victoire":
+            print(result)
+
+            return
         else:
-            print("Victoire")
-            rep: str = input("Voulez vous rejouer ? (Yes/No): ")
-    else :
-        print("Merci d'avoir joué !")
-
-
-def More_or_Less():
-    nb: int = int(input("Deviner le nombre mystère: "))
-    nb_mystère: int = random.randint(a, b)
-    while nb != n and c > 1:
-        if nb < n:
-            print("Plus","(Il vous reste", str(c-1), "essai sur 10)")
-
-        elif nb > n:
-            print("Moins","(Il vous reste", str(c-1), "essai sur 10)")
-
-        c=c-1
-        nb: int = int(input("Deviner le nombre mystère: "))
-    if c == 1:
-        print("Perdu")
-        Replay()
-    else :
-        print("Victoire")
-        Replay()
-
-
-
-
-
-
-
+            print(result,str(essai-1),"sur 10")
+            essai=essai-1
+    print("Perdu")
+    return
+Game()
 Replay()
