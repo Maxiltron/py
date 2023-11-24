@@ -53,3 +53,21 @@ def Replay():
     print("Merci d'avoir joué !")
 
 Game()
+
+while "Feuille" == "Feuille" or "Ciseaux" == "Ciseaux" or "Pierre" == "Pierre":
+    print("Egalité")
+
+while "Feuille" != "Ciseaux" or "Ciseaux" != "Pierre" or "Pierre"  == "Feuille":
+    print("Victoire")
+
+
+def Paper():
+
+
+
+def Scissors():
+
+
+def Rock():
+    while "Pierre" == "Ciseaux":
+
