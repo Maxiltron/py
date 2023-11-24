@@ -1,6 +1,15 @@
 import random
 
 
+def response_replay(message:str):
+    while True:
+        value:str = input(message)
+        if value == "yes":
+            return value
+        elif value == "no":
+            return value
+        else:
+            value = input("Erreur ! Répétez votre réponse (yes/no): ")
 def Ask_only_number(message: str):
     while True:
         value: str = input(message)
@@ -9,7 +18,6 @@ def Ask_only_number(message: str):
             return int(value)
 
         print("Erreur")
-
 
 
 def Ask_Min_Max():
@@ -26,28 +34,10 @@ def nb_random():
     nb: int = random.randint(a,b)
     return nb
 
-
-def Replay(message: str):
-    while message == "yes":
-        essai: int = 10
-        nb_AI: int = nb_random()
-        while True:
-            nb: int = Ask_only_number("Donnez un nombre: ")
-            if essai == 0:
-                print("Perdu")
-                return False
-            elif nb < nb_AI:
-                print("Plus", "(Il vous reste", str(essai - 1), "essai sur 10)")
-            elif nb > nb_AI:
-                print("Moins", "(Il vous reste", str(essai - 1), "essai sur 10)")
-            else:
-                print("Victoire")
-                return False
-            essai=essai-1
-
-
-def More_or_Less(a: int,b: int):
-    if a < b:
+def More_or_Less(a: int, b: int, c: int):
+    if c == 0:
+        value: str = "Perdu"
+    elif a < b:
         value: str = "Plus"
     elif a > b:
         value: str = "Moins"
@@ -55,20 +45,44 @@ def More_or_Less(a: int,b: int):
         value: str = "Victoire"
     return value
 
-def Game():
-    essai: int = 10
-    nb_AI: int = nb_random()
-    while essai >= 1:
-        nb: int = Ask_only_number("Donner un nombre: ")
-        result: str = More_or_Less(nb,nb_AI)
-        if result == "Victoire":
-            print(result)
 
-            return
-        else:
-            print(result,str(essai-1),"sur 10")
-            essai=essai-1
-    print("Perdu")
-    return
-Game()
-Replay()
+def Replay(message: str):
+    while message == "yes":
+        nb_AI: int = nb_random()
+        essai: int = 10
+        while True:
+            essai = essai - 1
+            nb: int = Ask_only_number("Donner un nombre: ")
+            result: str = More_or_Less(nb, nb_AI, essai)
+            print(result,"(il vous reste",str(essai), "essai")
+
+            if result == "Victoire" or result == "Perdu":
+                message:str =response_replay("Voulez vous rejouer ? (yes/no): ")
+                break
+    print("Merci d'avoir joué !")
+
+
+
+
+
+def Game():
+    nb_AI: int = nb_random()
+    essai:int = 10
+    while True:
+        essai=essai-1
+        nb: int = Ask_only_number("Donner un nombre: ")
+        result:str =More_or_Less(nb,nb_AI,essai)
+        print(result,"il vous reste",str(essai), "essai")
+
+        if result == "Victoire" or result == "Perdu":
+            value:str =response_replay("Voulez vous rejouer ? (yes/no): ")
+            return value
+
+
+
+
+
+
+
+response:str = Game()
+Replay(response)
