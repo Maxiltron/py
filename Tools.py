@@ -55,20 +55,41 @@ def Ask_PFC(message: str):
             return value
         print("Erreur")
 
+
 def Get_random_PFC():
-    list_AI: [str] = ["p","f","c"]
+    list_AI: [str] = ["p", "f", "c"]
     nb_AI: int = random.randint(0, 2)
     return list_AI[nb_AI]
 
 
-def Win_Or_Lose_PFC(choice_1: str,choice_2: str):
-    list_Win: [str] = ["pc", "fp", "cf"]
+def Win_Or_Lose_PFC(player: str, opponent: str):
+    winner_list: [str] = ["pc", "fp", "cf"]
     value_1: str = "Victoire"
-    value_2: str = "Perdu"
-    play: str = choice_1 + choice_2
-    while play in list_Win:
+    value_2: str = "Défaite"
+    play: str = player + opponent
+    if play in winner_list:
         return value_1
     return value_2
 
+
+def PFC(player: str, opponent: str) -> str:
+    equal: str = "Egalité"
+    if player == opponent:
+        return equal
+    value: str = Win_Or_Lose_PFC(player, opponent)
+    return value
+
+
+def Three_Wins_or_Loses():
+    rounds: list[str] = []
+    while rounds.count("1") != 3 and rounds.count("0") != 3:
+        choice_user: str = Ask_PFC("Choisissez entre (Pierre:p, Feuille:f, Ciseaux:c): ")
+        choice_AI: str = Get_random_PFC()
+        result: str = PFC(choice_user, choice_AI)
+        rounds.append(result)
+        print(result, "Choix de l'ordi:", choice_AI)
+        print("Wins:", str(rounds.count("Victoire")) + "/3")
+        print("Loses:", str(rounds.count("Défaite")) + "/3")
+    return rounds[len(rounds) - 1]
 
 
