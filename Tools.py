@@ -78,7 +78,7 @@ def Three_Wins_or_Loses():
         print("Loses:", str(rounds.count("0")) + "/3")
 
 
-    return rounds.count("0") % rounds.count("1")
+    return
 
 
 def Value_result(value: str):
