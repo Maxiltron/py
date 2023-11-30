@@ -7,6 +7,7 @@ RESULTS: list[list[str]] = [
 ]
 
 POSSIBILITIES: list[str] = ["p", "f", "c"]
+WIN_LOSE_GAME: list[str] = ["Vous avez perdu la partie.","Vous avez gagné la partie."]
 
 def Response_replay(list: [str]):
     while True:
@@ -68,7 +69,7 @@ def Get_random_PFC():
     return nb_AI
 
 
-def Three_Wins_or_Loses():
+def Three_Wins_or_Loses() -> str:
     rounds: list = []
 
     while rounds.count("0") != 3 and rounds.count("1") != 3:
@@ -76,9 +77,9 @@ def Three_Wins_or_Loses():
         rounds.append(str(result))
         print("Wins:", str(rounds.count("1")) + "/3")
         print("Loses:", str(rounds.count("0")) + "/3")
+    last_result: int = int(rounds[len(rounds)-1])
+    return WIN_LOSE_GAME[last_result]
 
-
-    return
 
 
 def Value_result(value: str):
@@ -93,3 +94,5 @@ def Play() -> int:
     print(result,"Choix de l'ordi:", POSSIBILITIES[choice_AI])
     win_lose: int = Value_result(result)
     return win_lose
+
+
